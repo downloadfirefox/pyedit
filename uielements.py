@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 import curses, files, utils, os, sys
+
+def checkVersion():
+    ver = sys.version.split(".")[0]
+    if ver == "2":
+        import python2utils as verTils
+    else:
+        import python3utils as verTils
+        
+checkVersion()
+
 class UIElements:
+	@staticmethod
 	def writeline(win, save_str, y, x, color):
 		height, width = win.getmaxyx()
 		win.move(y, x)
@@ -13,6 +24,7 @@ class UIElements:
 			whitespace += " "
 		win.addstr(y, x, save_str+whitespace, color)
 		win.refresh()
+	@staticmethod
 	def titlebar(win, args):
 		# Find max width of screen to make a complete line
 		height, width = win.getmaxyx()
@@ -31,6 +43,7 @@ class UIElements:
 			return args[1]
 		except Exception:
 			return ""
+	@staticmethod
 	def save_prompt(win, filename, contents):
 		height, width = win.getmaxyx()
 		UIElements.writeline(win, "Do you want to save your file? [y/n/c]", height - 2, 0, curses.color_pair(1))
@@ -50,9 +63,10 @@ class UIElements:
 			return True
 		else:
 			return False
+	@staticmethod
 	def help():
 		# Help message
-		print("""PyEdit (A text editor made using Python, curses and no external libraries).
+		verTils.cprint("""PyEdit (A text editor made using Python, curses and no external libraries).
 Current version: v0.0.1-alpha
 
 Usage: pyedit [arguments] [file...] Edit a specific file
@@ -65,4 +79,4 @@ Arguments:
 		sys.exit()
 		
 if __name__ == '__main__':
-	print("This is a file used by PyEdit. Run main.py to run PyEdit.")
+	verTils.cprint("This is a file used by PyEdit. Run main.py to run PyEdit.")

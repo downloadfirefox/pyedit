@@ -5,6 +5,15 @@ import signal, sys, os, tests, utils, files, curses
 from uielements import UIElements
 from datetime import datetime
 
+def checkVersion():
+    ver = sys.version.split(".")[0]
+    if ver == "2":
+        import python2utils as verTils
+    else:
+        import python3utils as verTils
+        
+checkVersion()
+
 def editor(win, args):
 	# Read file
 	try:
@@ -48,7 +57,7 @@ def editor(win, args):
 			if ch == curses.KEY_RIGHT:
 				lines = total.split('\n')
 				if len(lines[current_y-1]) <= current_x:
-					utils.printin('\a')
+					verTils.printin('\a')
 				else:
 					win.move(current_y, current_x+1)
 			elif ch == curses.KEY_LEFT:
@@ -56,7 +65,7 @@ def editor(win, args):
 					if current_y > 1:
 						win.move(current_y-1, len(total.split('\n')[current_x])+1)
 					else:
-						utils.printin('\a')
+						verTils.printin('\a')
 				else:
 					win.move(current_y, current_x-1)
 			elif ch == curses.KEY_DOWN:
@@ -66,7 +75,7 @@ def editor(win, args):
 					while len(lines[current_y-1]) >= current_x:
 						win.move(current_y, current_x-1)
 				else:
-					utils.printin('\a')
+					verTils.printin('\a')
 			elif ch == curses.KEY_UP:
 				if current_y > 1:
 					lines = total.split('\n')
@@ -74,7 +83,7 @@ def editor(win, args):
 					while len(lines[current_y-1]) >= current_x:
 						win.move(current_y, current_x-1)
 				else:
-					utils.printin('\a')
+					verTils.printin('\a')
 			elif ch == 10: # Enter
 				win.addch('\n')
 				lines = total.split('\n')
@@ -95,7 +104,7 @@ def editor(win, args):
 						total = '\n'.join(lines)
 						current_y, current_x = win.getyx()
 					else:
-						utils.printin('\a')
+						verTils.printin('\a')
 				if current_x > 0 and current_x <= len(total):
 					lines = total.split('\n')
 					current_y -= 1
@@ -133,7 +142,7 @@ def editor(win, args):
 							final = ''.join(command)
 							
 							if final == "quit" or final == "q":
-								# utils.printin(utils.unixcolors.BOLD + "Quitting..." + utils.unixcolors.END)
+								# verTils.printin(utils.unixcolors.BOLD + "Quitting..." + utils.unixcolors.END)
 								# Save prompt
 								try:
 									justavariabletoseeifthisexists = args[1]

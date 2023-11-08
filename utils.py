@@ -4,9 +4,7 @@
 import curses, sys, os
 from uielements import UIElements
 
-def printin(inp):
-	# Print inline
-	print(inp, end="", flush=True)
+
 
 
 class unixcolors:
@@ -47,27 +45,38 @@ def return_to_top(win, togo_y, togo_x):
 	
 def handleargs(args):
 	args = args[1:] # Ignore first argument, which is the script name
-	match_list = ["-h", "--help", "-l", "-v", "--verbose"]
+	match_list = ["-h", "--help", "-l", "-v", "--verbose"]#
+	notInList = 0
 	for i in args:
 		if i not in match_list:
-			print(unixcolors.BOLD + unixcolors.RED + "Error:"+unixcolors.END+" argument "+i+" not found.")
-			sys.exit()
+			notInList += 1
+			if notInList >= 2:
+				print(unixcolors.BOLD + unixcolors.RED + "Error:"+unixcolors.END+" argument "+i+" not found.")
+				sys.exit()
 	
 	try:
-		if args[1] == "--help" or args[1] == "-h" or args[1] == "-?":
+		if args[0] == "--help" or args[0] == "-h" or args[0] == "-?":
 			UIElements.help()
 		else:
-			if os.path.exists(args[1]) and os.path.isfile(args[1]) != True:
-				print(utils.unixcolors.RED + utils.unixcolors.BOLD + "Error: "+utils.unixcolors.END+args[1]+" is a directory, not a file.")
-				from subprocess import run
-				print("Files inside "+args[1]+":")
-				run(["ls", args[1]])
+			if os.path.exists(args[0]) and os.path.isfile(args[0]) != True:
+				print(unixcolors.RED + unixcolors.BOLD + "Error: "+unixcolors.END+args[0]+" is a directory, not a file.")
+				print("Files inside "+args[0]+":")
+				# run(["ls", args[0]])
+				ver = sys.version.split(".")[0]
+				if ver == "2":
+					import python2utils as verTils
+				else:
+					import python3utils as verTils
+
+				verTils.run(["ls", args[0]])
 				sys.exit()
 			else:
 				return True
 	except IndexError: # No argument
 		return True
-				
+
+
+
 	
 if __name__ == '__main__':
 	print("This is a file used by PyEdit. Run main.py to run PyEdit.")

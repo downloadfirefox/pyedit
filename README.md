@@ -3,10 +3,10 @@
 
 # pyedit
 
-A lightweight text editor made using Python 3, `curses` and no external libraries.
+A lightweight text editor made using Python and `curses`. No `pip` needed. For Unix-based systems. (Coming for Windows soon)
 
 ## Run
 
 `git clone` this repository and then run `src/main.py`.
 
-It should run on Python 3+. (Tested on Python 3.6)
+It should run on Python 2.6+. (Tested on Python 3.6, 3.10, 2.7)

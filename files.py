@@ -3,8 +3,9 @@
 
 def write_file(filename, contents):
 	try:
-		with open(filename, 'w') as f:
-			f.write(contents)
+		f = open(filename, 'w')
+		f.write(contents)
+		f.close()
 		return True
 	except Exception:
 		return False
@@ -12,17 +13,18 @@ def write_file(filename, contents):
 		
 def log(filename, contents):
 	try:
-		with open(filename, 'a+') as f:
-			f.write(contents)
+		f1 = open(filename, 'a+')
+		f1.write(contents)
+		f1.close()
 		return True
 	except Exception:
 		return False
 		
 def read_file(filename):
 	try:
-		with open(filename, 'r') as f:
-			file_contents = f.read()
-			return file_contents
+		f2 = open(filename)
+		file_contents = f2.read()
+		return file_contents
 	except Exception:
 		return ""
 		

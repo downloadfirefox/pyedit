@@ -9,9 +9,7 @@
 # TODO: add a .pyeditrc folder
 
 # Text editor?
-import curses, editor, sys, os, files, utils
-from uielements import UIElements
-from datetime import datetime
+import curses, editor, sys, files, utils
 
 
 

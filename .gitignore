@@ -5,3 +5,10 @@ __pycache__/*
 pyedit_LOG.log
 */pyedit_LOG.log
 */*/pyedit_LOG.log
+*.pyc
+*.log
+TEST
+main.build
+main.build/*
+main.build/*/*
+.vscode
