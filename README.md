@@ -10,3 +10,9 @@ A lightweight text editor made using Python and `curses`. No `pip` needed. For U
 `git clone` this repository and then run `src/main.py`.
 
 It should run on Python 2.6+. (Tested on Python 3.6, 3.10, 2.7)
+
+## Build
+
+Unfortunately, you need to install stuff for this one.
+
+`pip install nuitka` and then run `python3 -m nuitka --follow-imports --standalone main.py`

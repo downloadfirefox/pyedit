@@ -11,4 +11,4 @@ TEST
 main.build
 main.build/*
 main.build/*/*
-.vscode
+main.dist
